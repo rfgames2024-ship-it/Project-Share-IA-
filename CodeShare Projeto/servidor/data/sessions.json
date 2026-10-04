@@ -1,0 +1,18 @@
+{
+  "sessions": {
+    "e8c6b58ee7e736288c8b123cf65d22b6a6516f44cc4128d0d03b773c85d7f713": {
+      "userId": "user_1790194237357_79a45cc91a",
+      "expiresAt": 1792008637384
+    },
+    "e9e70ab78298f4f73196a5e2abd260476ad9733fc228e1fd7b51c82917365992": {
+      "userId": "user_1790194237357_79a45cc91a",
+      "createdAt": 1790366426322,
+      "expiresAt": 1792180826322
+    },
+    "96dd1a22f761d934f9ffa5a1f345b933b86d211c8dc3c2ce9ee37a7888402e66": {
+      "userId": "user_1790194237357_79a45cc91a",
+      "createdAt": 1790764152503,
+      "expiresAt": 1792578552503
+    }
+  }
+}

@@ -1,0 +1,73 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { min-height: 100vh; font-family: Inter, Arial, Helvetica, sans-serif; background: linear-gradient(135deg,#eaf7ff 0%,#f7fbff 48%,#eef7ff 100%); color:#1f2937; overflow-x:hidden; }
+
+#topBar { position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between; gap:15px; padding:14px 20px; background:rgba(255,255,255,.92); backdrop-filter:blur(16px); }
+#marca { color:#1565a8; font-size:22px; font-weight:900; }
+#accountEmail { margin-top:3px; max-width:42vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#788894; font-size:11px; }
+#topActions { display:flex; gap:8px; }
+#historic, #logoutButton { border:0; border-radius:11px; padding:10px 13px; background:#edf6fb; color:#24536c; font-weight:800; cursor:pointer; }
+#historic:hover, #logoutButton:hover { background:#dceef8; }
+
+#messages { width:min(920px,calc(100% - 28px)); min-height:100vh; margin:0 auto; padding:95px 0 125px; display:flex; flex-direction:column; gap:12px; }
+.userMessage, .aiMessage { max-width:min(78%,700px); padding:12px 15px; border-radius:18px; line-height:1.58; font-size:15px; overflow-wrap:anywhere; animation:appear .18s ease; }
+.userMessage { align-self:flex-end; margin-left:auto; color:white; background:linear-gradient(135deg,#2187c9,#2d9bdc); border-bottom-right-radius:6px; box-shadow:0 5px 16px rgba(33,135,201,.16); }
+.aiMessage { align-self:flex-start; margin-right:auto; color:#263844; background:rgba(255,255,255,.96); border-bottom-left-radius:6px; box-shadow:0 5px 16px rgba(40,92,121,.08); }
+.aiMessage strong { color:#123f5c; }
+.aiMessage .mdHeading { margin:4px 0 9px; color:#164f77; line-height:1.25; }
+.aiMessage h2.mdHeading { font-size:20px; }
+.aiMessage h3.mdHeading { font-size:17px; }
+.aiMessage h4.mdHeading { font-size:15px; }
+.aiMessage .mdSpacer { height:7px; }
+.aiMessage .mdList { margin:7px 0; padding-left:22px; }
+.aiMessage .mdList li { margin:4px 0; }
+.aiMessage code { padding:2px 6px; border-radius:7px; background:#eef5f9; color:#1d536f; font-family:Consolas,"Courier New",monospace; font-size:.92em; }
+.aiMessage pre { margin:10px 0 4px; padding:12px; overflow:auto; border-radius:12px; background:#f2f7fa; }
+.aiMessage pre code { padding:0; background:transparent; }
+.aiMessage .mdQuote { margin:8px 0; padding-left:12px; border-left:3px solid #7db8d8; color:#526477; }
+.mdTableWrap { width:100%; margin:10px 0; overflow-x:auto; }
+.aiMessage table { width:100%; border-collapse:collapse; font-size:14px; }
+.aiMessage th,.aiMessage td { padding:8px 10px; text-align:left; vertical-align:top; border:1px solid #cfdfe8; }
+.aiMessage th { background:#eef7fc; color:#194b69; font-weight:800; }
+
+#quadro { position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:40; width:min(760px,calc(100% - 28px)); display:flex; align-items:center; gap:8px; padding:8px; background:rgba(255,255,255,.94); border:1px solid #c8dce8; border-radius:16px; box-shadow:0 10px 30px rgba(32,86,114,.16); backdrop-filter:blur(14px); }
+#message { flex:1; min-width:0; padding:13px 15px; border:0; outline:0; border-radius:11px; background:#f4faff; color:#22313f; font-size:15px; }
+#message:focus { background:#eef8ff; }
+#sending { padding:13px 20px; border:0; border-radius:11px; background:#1f83c6; color:white; font-weight:800; cursor:pointer; }
+#sending:hover:not(:disabled) { background:#176da6; }
+#sending:disabled { opacity:.6; cursor:wait; }
+
+#profile { position:fixed; left:20px; bottom:20px; z-index:35; display:flex; align-items:center; gap:9px; padding:8px 11px; background:rgba(255,255,255,.9); border-radius:13px; box-shadow:0 7px 22px rgba(31,90,120,.1); backdrop-filter:blur(12px); }
+#profilePhoto { width:38px; height:38px; display:flex; align-items:center; justify-content:center; background:#dff4ff; border-radius:50%; }
+#profileName { max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#334155; font-size:13px; font-weight:800; }
+
+#historyOverlay { position:fixed; inset:0; z-index:100; display:flex; background:rgba(10,30,44,.22); opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease,visibility .2s ease; }
+#historyOverlay.historyOpen { opacity:1; visibility:visible; pointer-events:auto; }
+#historyPanel { width:min(400px,88vw); height:100%; padding:18px 16px; background:linear-gradient(180deg,#fbfeff,#eef8fd); box-shadow:14px 0 35px rgba(18,63,87,.12); overflow-y:auto; transform:translateX(-20px); transition:transform .2s ease; }
+#historyOverlay.historyOpen #historyPanel { transform:translateX(0); }
+#historyHeader { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:13px; }
+#historyTitle { color:#174f72; font-size:20px; font-weight:900; }
+#historyUser { margin-top:4px; color:#778894; font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#closeHistory { width:40px; height:40px; border:0; border-radius:10px; background:#e7f2f8; color:#31576d; font-size:25px; cursor:pointer; }
+#newChatButton { width:100%; margin-bottom:12px; padding:13px 14px; border:0; border-radius:12px; background:#1f83c6; color:white; font-weight:800; cursor:pointer; }
+#newChatButton:hover { background:#176da6; }
+#historyList { min-height:55vh; display:flex; flex-direction:column; gap:3px; padding:4px 0 25px; }
+.historyItem { width:100%; padding:13px 12px; text-align:left; border:0; border-radius:11px; background:transparent; color:#25465b; cursor:pointer; transition:background .15s ease; }
+.historyItem:hover { background:rgba(255,255,255,.75); }
+.activeHistoryItem { background:#e1f2fb; }
+.historyItemTitle { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:14px; font-weight:800; }
+.historyItemDate { margin-top:5px; color:#81919b; font-size:11px; }
+.emptyHistory { padding:28px 10px; text-align:center; color:#71818d; font-size:13px; line-height:1.5; }
+
+@keyframes appear { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+@media(max-width:700px){
+    #topBar { padding:11px 13px; }
+    #topActions { gap:5px; }
+    #historic,#logoutButton { padding:9px 10px; font-size:12px; }
+    #messages { width:calc(100% - 18px); padding-top:82px; padding-bottom:125px; }
+    .userMessage,.aiMessage { max-width:90%; }
+    #profile { left:13px; bottom:82px; }
+    #quadro { width:calc(100% - 18px); bottom:12px; }
+    #message { font-size:16px; }
+}
